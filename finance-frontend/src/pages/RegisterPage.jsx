@@ -1,6 +1,13 @@
+import {
+	Field,
+	FieldDescription,
+	FieldGroup,
+	FieldLabel,
+	FieldSet,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 export default function RegisterPage() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -38,7 +45,7 @@ export default function RegisterPage() {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify(jsonData),
-				}
+				},
 			);
 
 			const data = await response.json();
@@ -63,7 +70,7 @@ export default function RegisterPage() {
 		<div className=" w-dvw h-dvh  bg-blue flex">
 			<div className="h-full w-4/10 relative flex items-center justify-center">
 				<img
-					src="https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+					src="https://images.pexels.com/photos/259209/pexels-photo-259209.jpeg?_gl=1*1uxuiol*_ga*MTMwMjIwNzY3MS4xNzcwMjMwMzY1*_ga_8JE65Q40S6*czE3NzAyMzI3NDQkbzIkZzEkdDE3NzAyMzI4MDgkajU5JGwwJGgw"
 					alt=""
 					className="object-cover object-center h-full w-full absolute "
 				/>
@@ -85,109 +92,150 @@ export default function RegisterPage() {
 					</div>
 				</div>
 			</div>
-			<div className="animate-appear h-full items-center pattern bg-blue w-6/10 flex flex-col justify-center py-20">
-				<div className="flex flex-col items-center gap-4">
-					<div className="text-white font-black font-mont text-5xl">
-						EVNT.
+			<div className="animate-appear h-full items-center bg-background w-6/10 flex flex-col justify-center py-20">
+				<div className="bg-foreground py-20">
+					<div className="flex flex-col items-center gap-4">
+						<div className="text-white font-black font-mont text-5xl">
+							EVNLP.
+						</div>
+						<div className="text-white font-normal font-mont text-2xl">
+							Create a new account
+						</div>
 					</div>
-					<div className="text-white font-normal font-mont text-3xl">
-						Create a new account
-					</div>
-				</div>
 
-				<form
-					onSubmit={handleSubmit}
-					method="post"
-					className="px-30 w-full  mt-3"
-				>
-					<div className="flex flex-wrap -mx-3">
-						<div className="w-full px-3 mb-6">
-							<label
-								className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-								for="firstName"
-							>
-								First Name
-							</label>
-							<input
-								className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
-								name="firstName"
-								type="text"
-								placeholder="e.g. John"
-							/>
-						</div>
-						<div className="w-full px-3 mb-6">
-							<label
-								className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-								for="lastName"
-							>
-								Last Name
-							</label>
-							<input
-								className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
-								name="lastName"
-								type="text"
-								placeholder="e.g. Doe"
-							/>
+					<form
+						onSubmit={handleSubmit}
+						method="post"
+						className="px-30 w-full mt-5"
+					>
+						<div className="flex flex-col items-center w-full">
+							<FieldSet className="w-full max-w-lg">
+								<FieldGroup className="flex flex-row  justify-between">
+									<Field className="w-2/3">
+										<FieldLabel htmlFor="firstName">
+											First Name
+										</FieldLabel>
+										<Input
+											id="firstName"
+											type="text"
+											name="firstName"
+											placeholder="Andrew"
+										/>
+									</Field>
+									<Field className="w-2/3">
+										<FieldLabel htmlFor="lastName">
+											Last Name
+										</FieldLabel>
+										<Input
+											id="lastName"
+											type="text"
+											name="lastName"
+											placeholder="Ezzat"
+										/>
+									</Field>
+								</FieldGroup>
+								<Field className="w-full">
+									<FieldLabel htmlFor="email">
+										Email
+									</FieldLabel>
+									<Input
+										id="email"
+										type="email"
+										name="email"
+										placeholder="andrewezzat@gmail.com"
+									/>
+								</Field>
+								<FieldGroup className="flex flex-row justify-between">
+									<Field className="w-2/3">
+										<FieldLabel htmlFor="firstName">
+											Password
+										</FieldLabel>
+										<Input
+											id="password"
+											type="password"
+											name="password"
+											placeholder="••••••••"
+										/>
+									</Field>
+									<Field className="w-2/3">
+										<FieldLabel htmlFor="lastName">
+											Confirm Password
+										</FieldLabel>
+										<Input
+											id="confirmPassword"
+											type="password"
+											name="confirmPassword"
+											placeholder="••••••••"
+										/>
+									</Field>
+								</FieldGroup>
+							</FieldSet>
+
+							<div className="w-full px-3 mt-10  flex flex-col items-center justify-center">
+								<button
+									type="submit"
+									className=" w-1/3 border-white border-opacity-50 border-2 hover:text-background hover:bg-white transition-all text-white px-4 py-2 my-3 rounded cursor-pointer"
+								>
+									Register
+								</button>
+								<p
+									id="errorMsg"
+									className="text-red-700 text-xs italic hidden"
+								></p>
+							</div>
 						</div>
 
-						<div className="w-full px-3 mb-6">
-							<label
-								className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-								for="email"
-							>
-								Email
-							</label>
-							<input
-								className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
-								name="email"
-								type="email"
-								placeholder="e.g. name@gmail.com"
-							/>
-						</div>
-
-						<div className="w-full px-3 mb-6 relative">
-							<label
-								className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-								for="password"
-							>
-								Password
-							</label>
-							<input
-								type={showPassword ? "text" : "password"}
-								name="password"
-								placeholder="********"
-								className=" appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 pr-16 mb-3 leading-tight focus:outline-none"
-							/>
-							<button
-								type="button"
-								onClick={togglePassword}
-								className="cursor-pointer absolute right-10 top-[57%] translate-y-[-50%] font-bold text-sm text-blue-600  focus:outline-none"
-							>
-								{showPassword ? "Hide" : "Show"}
-							</button>
-						</div>
-
-						<div className="w-full px-3 mb-6 relative">
-							<label
-								className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-								for="password"
-							>
-								Confirm Password
-							</label>
-							<input
-								type={showConfirmPassword ? "text" : "password"}
-								name="confirmPassword"
-								placeholder="********"
-								className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 pr-16 mb-3 leading-tight focus:outline-none"
-							/>
-							<button
-								type="button"
-								onClick={toggleConfirmPassword}
-								className="cursor-pointer absolute right-10 top-[57%] translate-y-[-50%] font-bold text-sm text-blue-600  focus:outline-none"
-							>
-								{showConfirmPassword ? "Hide" : "Show"}
-							</button>
-						</div>
+						{/* <div className="flex bg-red-400 items-center justify-center -mx-3">
+						<FieldSet className="w-full">
+							<FieldGroup>
+								<div className="w-full flex justify-center px-3 mb-6 gap-4 bg-white">
+									<Field>
+										<FieldLabel htmlFor="firstName">
+											First Name
+										</FieldLabel>
+										<Input
+											id="firstName"
+											type="text"
+											name="firstName"
+											placeholder="Andrew"
+										/>
+									</Field>
+									<Field>
+										<FieldLabel htmlFor="lastName">
+											First Name
+										</FieldLabel>
+										<Input
+											id="lastName"
+											type="text"
+											name="lastName"
+											placeholder="Ezzat"
+										/>
+									</Field>
+								</div>
+								<Field>
+									<FieldLabel htmlFor="username">
+										Email
+									</FieldLabel>
+									<Input
+										id="email"
+										type="email"
+										name="email"
+										placeholder="andrewezzat@gmail.com"
+									/>
+								</Field>
+								<Field>
+									<FieldLabel htmlFor="password">
+										Password
+									</FieldLabel>
+									<Input
+										id="password"
+										type="password"
+										name="password"
+										placeholder="••••••••"
+									/>
+								</Field>
+							</FieldGroup>
+						</FieldSet>
 
 						<div className="w-full px-3  flex flex-col items-center justify-center">
 							<button
@@ -201,8 +249,9 @@ export default function RegisterPage() {
 								className="text-white text-xs italic hidden"
 							></p>
 						</div>
-					</div>
-				</form>
+					</div> */}
+					</form>
+				</div>
 			</div>
 		</div>
 	);

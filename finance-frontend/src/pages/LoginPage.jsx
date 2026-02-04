@@ -1,6 +1,13 @@
+import {
+	Field,
+	FieldDescription,
+	FieldGroup,
+	FieldLabel,
+	FieldSet,
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 export default function LoginPage() {
 	const [showPassword, setShowPassword] = useState(false);
 	const navigate = useNavigate();
@@ -45,7 +52,7 @@ export default function LoginPage() {
 				localStorage.setItem("userId", data.data.id);
 				localStorage.setItem("firstName", data.data.firstName);
 				localStorage.setItem("lastName", data.data.lastName);
-				navigate("/events");
+				navigate("/accounts");
 			}
 		} catch (error) {
 			navigate("/error", { state: { message: error.message } });
@@ -55,78 +62,71 @@ export default function LoginPage() {
 	const togglePassword = () => setShowPassword(!showPassword);
 
 	return (
-		<div className=" w-dvw h-dvh  bg-blue flex">
-			<div className="h-full animate-appear items-center pattern bg-blue w-6/10 flex flex-col justify-center py-20">
-				<div className="flex flex-col items-center gap-4">
-					<div className="text-white font-black font-mont text-5xl">
-						EVNLP.
+		<div className=" w-dvw animate-appear h-dvh bg-background flex">
+			<div className="h-full  items-center w-6/10 flex flex-col justify-center py-20">
+				<div className="bg-foreground py-20 flex flex-col justify-center">
+					<div className="flex flex-col items-center gap-4">
+						<div className="text-white font-black font-mont text-5xl">
+							EVNLPs.
+						</div>
+						<div className="text-white font-normal font-mont text-2xl">
+							Sign in to your account
+						</div>
 					</div>
-					<div className="text-white font-normal font-mont text-3xl">
-						Sign in to your account
-					</div>
+
+					<form
+						onSubmit={handleSubmit}
+						method="post"
+						className="px-30 w-full mt-5 "
+					>
+						<div className="flex flex-wrap -mx-3 mb-6 justify-center">
+							<FieldSet className="w-full max-w-lg">
+								<FieldGroup>
+									<Field>
+										<FieldLabel htmlFor="username">
+											Email
+										</FieldLabel>
+										<Input
+											id="email"
+											type="email"
+											name="email"
+											placeholder="andrewezzat@gmail.com"
+										/>
+									</Field>
+									<Field>
+										<FieldLabel htmlFor="password">
+											Password
+										</FieldLabel>
+										<Input
+											id="password"
+											type="password"
+											name="password"
+											placeholder="••••••••"
+										/>
+									</Field>
+								</FieldGroup>
+							</FieldSet>
+
+							<div className="w-full px-3 mt-10 flex flex-col items-center justify-center">
+								<button
+									type="submit"
+									className=" w-1/3 border-white border-opacity-50 border-2 hover:text-background hover:bg-white transition-all text-white px-4 py-2 rounded cursor-pointer"
+								>
+									Login
+								</button>
+								<p
+									id="errorMsg"
+									className="text-red-700 text-xs italic hidden"
+								></p>
+							</div>
+						</div>
+					</form>
 				</div>
-
-				<form
-					onSubmit={handleSubmit}
-					method="post"
-					className="px-30 w-full mt-3"
-				>
-					<div className="flex flex-wrap -mx-3 mb-6">
-						<div className="w-full px-3 mb-6">
-							<label
-								className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-								for="email"
-							>
-								Email
-							</label>
-							<input
-								className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
-								name="email"
-								type="email"
-								placeholder="e.g. name@gmail.com"
-							/>
-						</div>
-						<div className="w-full px-3 mb-6 relative">
-							<label
-								className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
-								for="password"
-							>
-								Password
-							</label>
-							<input
-								type={showPassword ? "text" : "password"}
-								name="password"
-								placeholder="********"
-								className=" appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 pr-16 mb-3 leading-tight focus:outline-none"
-							/>
-							<button
-								type="button"
-								onClick={togglePassword}
-								className="cursor-pointer absolute right-10 top-[57%] translate-y-[-50%] font-bold text-sm text-blue-600  focus:outline-none"
-							>
-								{showPassword ? "Hide" : "Show"}
-							</button>
-						</div>
-
-						<div className="w-full px-3 mb-6 flex flex-col items-center justify-center">
-							<button
-								type="submit"
-								className=" w-1/3 border-white border-2 hover:text-blue hover:bg-white transition-all text-white px-4 py-2 my-3 rounded cursor-pointer"
-							>
-								Login
-							</button>
-							<p
-								id="errorMsg"
-								className="text-white text-xs italic hidden"
-							></p>
-						</div>
-					</div>
-				</form>
 			</div>
 
 			<div className="h-full w-4/10 relative flex items-center justify-center">
 				<img
-					src="https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+					src="https://images.pexels.com/photos/10653885/pexels-photo-10653885.jpeg?_gl=1*1ce8x5l*_ga*MTMwMjIwNzY3MS4xNzcwMjMwMzY1*_ga_8JE65Q40S6*czE3NzAyMzAzNjQkbzEkZzEkdDE3NzAyMzA0MDckajE3JGwwJGgw"
 					alt=""
 					className="object-cover object-center h-full w-full absolute "
 				/>
@@ -192,22 +192,22 @@ export default function LoginPage() {
 		// 						placeholder="********"
 		// 						class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 pr-16 mb-3 leading-tight focus:outline-none"
 		// 					/>
-		// 					<button
-		// 						type="button"
-		// 						onClick={togglePassword}
-		// 						class="cursor-pointer absolute right-4 top-[50%] translate-y-[-50%] text-sm text-blue-600 hover:underline focus:outline-none"
-		// 					>
-		// 						{showPassword ? "Hide" : "Show"}
-		// 					</button>
+		// <button
+		// 	type="button"
+		// 	onClick={togglePassword}
+		// 	class="cursor-pointer absolute right-4 top-[50%] translate-y-[-50%] text-sm text-blue-600 hover:underline focus:outline-none"
+		// >
+		// 	{showPassword ? "Hide" : "Show"}
+		// </button>
 		// 				</div>
 
 		// 				<div class="w-full px-3 mb-6 md:mb-0">
-		// 					<button
-		// 						type="submit"
-		// 						class="bg-blue-500 text-white px-4 py-2 mb-3 rounded cursor-pointer"
-		// 					>
-		// 						Login
-		// 					</button>
+		// <button
+		// 	type="submit"
+		// 	class="bg-blue-500 text-white px-4 py-2 mb-3 rounded cursor-pointer"
+		// >
+		// 	Login
+		// </button>
 		// 					<p
 		// 						id="errorMsg"
 		// 						class="text-red-500 text-xs italic hidden"
