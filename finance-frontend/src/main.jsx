@@ -1,9 +1,12 @@
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Title from "./components/Title.jsx";
+import { SidebarProvider } from "./components/ui/sidebar.jsx";
 import "./index.css";
+import AccountsPage from "./pages/AccountsPage.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -14,6 +17,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import SuccessPage from "./pages/SuccessPage.jsx";
 import TicketsPage from "./pages/TicketsPage.jsx";
+import TransactionsPage from "./pages/TransactionsPage.jsx";
 import UnbookEvent from "./pages/UnbookEvent.jsx";
 const router = createBrowserRouter([
 	{
@@ -55,6 +59,22 @@ const router = createBrowserRouter([
 		element: (
 			<Title title="EVNT. | Explore Events">
 				<EventsPage />
+			</Title>
+		),
+	},
+	{
+		path: "/accounts",
+		element: (
+			<Title title="EVNT. | Explore Events">
+				<AccountsPage />
+			</Title>
+		),
+	},
+	{
+		path: "/transactions",
+		element: (
+			<Title title="EVNT. | Explore Events">
+				<TransactionsPage />
 			</Title>
 		),
 	},
@@ -120,8 +140,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
-		<RouterProvider router={router} />
-	</StrictMode>
+		<SidebarProvider>
+			<TooltipProvider>
+				<RouterProvider router={router} />
+			</TooltipProvider>
+		</SidebarProvider>
+	</StrictMode>,
 );
 
 router.subscribe(() => {
