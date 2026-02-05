@@ -96,7 +96,7 @@ export default function RegisterPage() {
 				<div className="bg-foreground py-20">
 					<div className="flex flex-col items-center gap-4">
 						<div className="text-white font-black font-mont text-5xl">
-							EVNLP.
+							Enveloop
 						</div>
 						<div className="text-white font-normal font-mont text-2xl">
 							Create a new account

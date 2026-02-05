@@ -35,12 +35,18 @@ dd {
 
 @layer base {
 	:root {
-		--background: 0 0% 100%;
-		--foreground: 0 0% 3.9%;
-		--card: 0 0% 100%;
-		--card-foreground: 0 0% 3.9%;
-		--popover: 0 0% 100%;
-		--popover-foreground: 0 0% 3.9%;
+		--background-h: 230;
+		--background-s: 87%;
+		--background-l: 6%;
+		--foreground-h: var(--background-h);
+		--foreground-s: calc(var(--background-s) - 30%);
+		--foreground-l: calc(var(--background-l) + 3%);
+		--background: var(--background-h) var(--background-s)
+			var(--background-l);
+		--foreground: var(--foreground-h) var(--foreground-s)
+			var(--foreground-l);
+		--popover: 230 87% 6%;
+		--popover-foreground: 230 7% 59%;
 		--primary: 0 0% 9%;
 		--primary-foreground: 0 0% 98%;
 		--secondary: 0 0% 96.1%;
@@ -60,38 +66,18 @@ dd {
 		--chart-3: 197 37% 24%;
 		--chart-4: 43 74% 66%;
 		--chart-5: 27 87% 67%;
-	}
-
-	.dark {
-		--background-h: 230;
-		--background-s: 87%;
-		--background-l: 6%;
-		--background: var(--background-h) var(--background-s)
-			var(--background-l);
-		--foreground: var(--background-h) calc(var(--background-s) - 30%)
-			calc(var(--background-l) + 3%);
-		--card: 0 0% 3.9%;
-		--card-foreground: 0 0% 98%;
-		--popover: 0 0% 3.9%;
-		--popover-foreground: 0 0% 98%;
-		--primary: 0 0% 98%;
-		--primary-foreground: 0 0% 9%;
-		--secondary: 0 0% 14.9%;
-		--secondary-foreground: 0 0% 98%;
-		--muted: 0 0% 14.9%;
-		--muted-foreground: 0 0% 63.9%;
-		--accent: 0 0% 14.9%;
-		--accent-foreground: 0 0% 98%;
-		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 0 0% 98%;
-		--border: 0 0% 14.9%;
-		--input: 0 0% 14.9%;
-		--ring: 0 0% 83.1%;
-		--chart-1: 220 70% 50%;
-		--chart-2: 160 60% 45%;
-		--chart-3: 30 80% 55%;
-		--chart-4: 280 65% 60%;
-		--chart-5: 340 75% 55%;
+		--sidebar-background: var(--foreground-h) var(--foreground-s)
+			var(--foreground-l);
+		--sidebar-foreground: var(--foreground-h)
+			calc(var(--foreground-s) - 50%) calc(var(--foreground-l) + 50%);
+		/* --sidebar-background: 0 0% 98%;
+		--sidebar-foreground: 240 5.3% 26.1%; */
+		--sidebar-primary: 240 5.9% 10%;
+		--sidebar-primary-foreground: 0 0% 98%;
+		--sidebar-accent: 240 4.8% 95.9%;
+		--sidebar-accent-foreground: 240 5.9% 10%;
+		--sidebar-border: 30 40% 6%;
+		--sidebar-ring: 217.2 91.2% 59.8%;
 	}
 }
 
@@ -121,5 +107,14 @@ dd {
 	.pattern {
 		background-color: #2970fe;
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cpath fill='%23ffffff' fill-opacity='0.09' d='M600 325.1v-1.17c-6.5 3.83-13.06 7.64-14.68 8.64...'%3E%3C/path%3E%3C/svg%3E");
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
 	}
 }

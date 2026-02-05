@@ -2,7 +2,6 @@ import tailwindcssAnimate from "tailwindcss-animate";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-	darkMode: ["class"],
 	content: [
 		"./index.html",
 		"./src/**/*.{js,ts,jsx,tsx}",
@@ -10,11 +9,7 @@ export default {
 	],
 	theme: {
 		extend: {
-			// Add your custom colors
 			colors: {
-				// or whatever your custom blue color is
-				blue: "#2970fe",
-				navy: "#081327",
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				card: {
@@ -55,32 +50,45 @@ export default {
 					4: "hsl(var(--chart-4))",
 					5: "hsl(var(--chart-5))",
 				},
+				sidebar: {
+					DEFAULT: "hsl(var(--sidebar-background))",
+					foreground: "hsl(var(--sidebar-foreground))",
+					primary: "hsl(var(--sidebar-primary))",
+					"primary-foreground":
+						"hsl(var(--sidebar-primary-foreground))",
+					accent: "hsl(var(--sidebar-accent))",
+					"accent-foreground":
+						"hsl(var(--sidebar-accent-foreground))",
+					border: "hsl(var(--sidebar-border))",
+					ring: "hsl(var(--sidebar-ring))",
+				},
 			},
-			// Add custom spacing
 			spacing: {
 				30: "7.5rem",
 			},
-			// Add custom width values
 			width: {
+				150: "37.5rem",
 				"4/10": "40%",
 				"6/10": "60%",
-				150: "37.5rem",
 				dvh: "100dvh",
 			},
-			// Add custom height values
 			height: {
 				150: "37.5rem",
 			},
-			// Add custom font families
 			fontFamily: {
 				mont: ["Montserrat", "sans-serif"],
 				pop: ["Poppins", "sans-serif"],
 			},
-			// Add custom animations
 			keyframes: {
 				appear: {
-					"0%": { opacity: "0", transform: "translateY(20px)" },
-					"100%": { opacity: "1", transform: "translateY(0)" },
+					"0%": {
+						opacity: "0",
+						transform: "translateY(20px)",
+					},
+					"100%": {
+						opacity: "1",
+						transform: "translateY(0)",
+					},
 				},
 			},
 			animation: {

@@ -52,6 +52,8 @@ export default function LoginPage() {
 				localStorage.setItem("userId", data.data.id);
 				localStorage.setItem("firstName", data.data.firstName);
 				localStorage.setItem("lastName", data.data.lastName);
+				localStorage.setItem("email", jsonData["email"]);
+
 				navigate("/accounts");
 			}
 		} catch (error) {
@@ -67,7 +69,7 @@ export default function LoginPage() {
 				<div className="bg-foreground py-20 flex flex-col justify-center">
 					<div className="flex flex-col items-center gap-4">
 						<div className="text-white font-black font-mont text-5xl">
-							EVNLPs.
+							Enveloop
 						</div>
 						<div className="text-white font-normal font-mont text-2xl">
 							Sign in to your account
